@@ -59,4 +59,13 @@ function getApiHateoas(req: Request, res: Response) {
     });
 }
 
-export default { getRootHateoas, getApiHateoas }
+function getTrucksLinks(){
+    return [
+         {
+             href: 'trucks/:id',
+             rel: ':id',
+             type: 'GET',
+         },
+    ];
+}
+export default { getRootHateoas, getApiHateoas,getTrucksLinks}

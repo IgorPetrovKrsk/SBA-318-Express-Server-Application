@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import error from './error/error';
 import hateoas from './hateoas/hateoas';
+import truckRoutes from './routes/trucksRoutes';
 
 //setup
 const app = express();
@@ -10,10 +11,8 @@ const PORT = 3000;
 //middleware
 app.use(express.json());
 
-// app.get('/',(req,res,next) =>{
-//   //res.json({test:'test'});
-//   //next();
-// })
+//adding routes
+app.use ('/api/trucks',truckRoutes);
 
 // Adding some HATEOAS links.
 app.get('/', hateoas.getRootHateoas);
