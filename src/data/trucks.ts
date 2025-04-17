@@ -1,13 +1,13 @@
 export enum TruckStatus {
-    Available,
-    EnRoute,
-    Idle,
-    Repairs
+    Available = 'Available',
+    EnRoute = 'En Route',
+    Idle = 'Idle',
+    Repairs = 'Repairs'
 }
 
 export interface Truck {
     id: number
-    driverName: string
+    driverName: string | null //truck can be without driver
     licensePlate: string
     status: TruckStatus
     capacity:number 

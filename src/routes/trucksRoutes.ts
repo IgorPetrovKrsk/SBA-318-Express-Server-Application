@@ -1,12 +1,12 @@
 import express from 'express';
-import { getAllTrucks } from '../controllers/truckController';
+import trucks from '../controllers/truckController';
 
 const router = express.Router();
 
 router
   .route('/')
-  .get(getAllTrucks)
-//  .post(postNewTruck); 
+  .get(trucks.getAllTrucks)
+  .post(trucks.postnewTruck); 
 
 // router
 //   .route('/:id') //geting truck by Id
