@@ -1,9 +1,9 @@
-import express from 'express';
-import error from './error/error.mjs';
+import express, { Request, Response, NextFunction } from 'express';
+import error from './error/error';
 
 //setup
 const app = express();
-const PORT = 3000 || 3001;
+const PORT = 3000;
 
 
 //middleware
@@ -20,7 +20,7 @@ app.use((req, res, next) => {
 });
 
 //error handling
-app.use((err, req, res, next) => {
+app.use((err: any, req:Request, res:Response, next: NextFunction) => {
     res.status(err.status || 500);
     res.json({ error: err.message });
   });
