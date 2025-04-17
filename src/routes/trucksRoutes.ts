@@ -9,19 +9,16 @@ router
         if (Object.keys(req.query).length === 0) {
             trucks.getAllTrucks(req, res);
         } else {
-            trucks.getTruckById(req, res, next);
+            trucks.getTruckById(req, res, next); //getting single truck by id in querry parametr
         }
-    })    
+    })
     .post(trucks.postnewTruck)
     .delete(trucks.deleteAllTrucks); //this is not safe
-    router.get('/', trucks.getTruckById); // get truck from querry parametr just for training
 
 router
-    .route('/:truckId')
-    .get(trucks.getTruckById) //geting truck by Id
-    
-
-//   .put(putTruckById)
-//   .delete(deleteTruckById);
+    .route('/:truckId') 
+    .get(trucks.getTruckById) //getting truck by Id
+    .put(trucks.putTruckById)
+    .delete(trucks.deleteTruckById);
 
 export default router;

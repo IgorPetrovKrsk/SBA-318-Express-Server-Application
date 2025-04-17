@@ -61,6 +61,11 @@ function getTrucksLinks(){
              rel: ':id',
              type: 'GET',
          },
+         {
+            href: 'trucks/?truckId={id}',
+            rel: 'queryParamId',
+            type: 'GET',
+        }
     ];
 }
 
