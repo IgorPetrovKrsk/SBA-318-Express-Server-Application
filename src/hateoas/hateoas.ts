@@ -28,11 +28,6 @@ function getApiHateoas(req: Request, res: Response) {
             {
                 href: 'api/trucks',
                 rel: 'trucks',
-                type: 'PUT',
-            },
-            {
-                href: 'api/trucks',
-                rel: 'trucks',
                 type: 'DELETE',
             },
             {
@@ -62,10 +57,26 @@ function getApiHateoas(req: Request, res: Response) {
 function getTrucksLinks(){
     return [
          {
-             href: 'trucks/:id',
+             href: 'trucks/:truckId',
              rel: ':id',
              type: 'GET',
          },
     ];
 }
-export default { getRootHateoas, getApiHateoas,getTrucksLinks}
+
+function getTruckByIdLinks(truckId:number){
+    return [
+        {
+            href: `/${truckId}`,
+            rel: 'update',
+            type: 'PATCH',
+        },
+        {
+            href: `/${truckId}`,
+            rel: 'delete',
+            type: 'DELETE',
+        },
+    ];
+}
+
+export default { getRootHateoas, getApiHateoas,getTrucksLinks,getTruckByIdLinks}

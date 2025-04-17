@@ -4,13 +4,23 @@ import trucks from '../controllers/truckController';
 const router = express.Router();
 
 router
-  .route('/')
-  .get(trucks.getAllTrucks)
-  .post(trucks.postnewTruck); 
+    .route('/')
+    .get((req, res, next) => {
+        if (Object.keys(req.query).length === 0) {
+            trucks.getAllTrucks(req, res);
+        } else {
+            trucks.getTruckById(req, res, next);
+        }
+    })    
+    .post(trucks.postnewTruck)
+    .delete(trucks.deleteAllTrucks); //this is not safe
+    router.get('/', trucks.getTruckById); // get truck from querry parametr just for training
 
-// router
-//   .route('/:id') //geting truck by Id
-//   .get(getTruckById)
+router
+    .route('/:truckId')
+    .get(trucks.getTruckById) //geting truck by Id
+    
+
 //   .put(putTruckById)
 //   .delete(deleteTruckById);
 
