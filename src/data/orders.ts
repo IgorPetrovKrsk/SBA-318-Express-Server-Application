@@ -1,8 +1,8 @@
 export enum OrderStatus {
-    Pending,
-    Assigned,
-    Delivered,
-    Returned
+    Pending = 'Pending',
+    Assigned = 'Assignrd',
+    Delivered = 'Delivered',
+    Returned = 'Returned'
 }
 
 export interface Order {

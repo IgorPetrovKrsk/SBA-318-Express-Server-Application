@@ -2,6 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import error from './error/error';
 import hateoas from './hateoas/hateoas';
 import truckRoutes from './routes/trucksRoutes';
+import orderRoutes from './routes/ordersRoutes';
 
 //setup
 const app = express();
@@ -13,6 +14,7 @@ app.use(express.json());
 
 //adding routes
 app.use ('/api/trucks',truckRoutes);
+app.use ('/api/orders',orderRoutes);
 
 // Adding some HATEOAS links.
 app.get('/', hateoas.getRootHateoas);

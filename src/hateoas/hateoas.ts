@@ -43,7 +43,7 @@ function getApiHateoas(req: Request, res: Response) {
             {
                 href: 'api/orders',
                 rel: 'orders',
-                type: 'PUT',
+                type: 'PATCH',
             },
             {
                 href: 'api/orders',
@@ -84,4 +84,14 @@ function getTruckByIdLinks(truckId:number){
     ];
 }
 
-export default { getRootHateoas, getApiHateoas,getTrucksLinks,getTruckByIdLinks}
+function getOrdersLinks(){
+    return [
+         {
+             href: 'orders/:orderId',
+             rel: ':id',
+             type: 'GET',
+         }         
+    ];
+}
+
+export default { getRootHateoas, getApiHateoas,getTrucksLinks,getTruckByIdLinks,getOrdersLinks}
