@@ -19,6 +19,9 @@ app.use ('/api/orders',orderRoutes);
 // Adding some HATEOAS links.
 app.get('/', hateoas.getRootHateoas);
 app.get('/api', hateoas.getApiHateoas);
+app.get('/teapot', (req,res,next) => {
+  next(error(418, `I'm a teapot`));
+} )
 
 // 404 Middleware
 app.use((req, res, next) => {
