@@ -27,60 +27,55 @@ function postNewOrder(req: Request, res: Response, next: NextFunction) {
         next(error(400, 'Insufficient Data'));
 }
 
-// function deleteAllTrucks(req: Request, res: Response) {
-//     trucks.length = 0; //clearing the array
-//     res.json({ trucks });
-// }
+function deleteAllOrders(req: Request, res: Response) {
+    orders.length = 0; //clearing the array
+    res.json({ orders });
+}
 
-// //functions what works with id
-// function getTruckById(req: Request, res: Response, next: NextFunction) {
-//     const truckId: number = req.query.truckId
-//         ? parseInt(req.query.truckId as string, 0)
-//         : parseInt(req.params.truckId as string, 0);
-//     const truckByIdLinks = hateoas.getTruckByIdLinks(truckId);
-//     const truck = trucks.find((it) => it.id == truckId);
+//functions what works with id
+function getOrderById(req: Request, res: Response, next: NextFunction) {
+    const orderId = req.query.orderId ? req.query.orderId as string : req.params.orderId;
+    const orderByIdLinks = hateoas.getOrderByIdLinks(orderId);
+    const order = orders.find((it) => it.id == orderId);
 
-//     if (truck)
-//         res.json({ truck, truckByIdLinks });
-//     else
-//         next();
-// }
+    if (order)
+        res.json({ order, orderByIdLinks });
+    else
+        next();
+}
 
-// function putTruckById(req: Request, res: Response, next: NextFunction) {
-//     const truckId: number = req.query.truckId
-//         ? parseInt(req.query.truckId as string, 0)
-//         : parseInt(req.params.truckId as string, 0);
+function patchOrderById(req: Request, res: Response, next: NextFunction) {
+    const orderId = req.query.orderId ? req.query.orderId as string : req.params.orderId;
+    const order = orders.find((it) => it.id === orderId);
+    if (order && order.status !== OrderStatus.Pending) {
+        next(error(403, 'It is forbidden to change orders that are not pending'));
+    } else if (order) {
+        for (const key in req.body) {
+            //@ts-ignore                  //I don't know how to fix this TS error so just ignoring
+            order[key] = req.body[key];
+        }
+        res.json({ order });
+    }
+    else
+        next();
+}
 
-//     const truck = trucks.find((it) => it.id === truckId);
+function deleteOrderById(req: Request, res: Response, next: NextFunction) {
+    const orderId = req.query.orderId ? req.query.orderId as string : req.params.orderId;
+    const order = orders.find((it, i) => {
+        if (it.id == orderId) {
+            orders.splice(i, 1);
+            return true;
+        }
+    });
 
-//     if (truck && req.body.licensePlate && req.body.capacity) {
-//         truck.driverName = req.body.driverName; //can be null
-//         truck.licensePlate = req.body.licensePlate;
-//         if (req.body.status) {
-//             truck.status = TruckStatus[req.body.status as keyof typeof TruckStatus];
-//         }
-//         truck.capacity = req.body.capacity;
-//         res.json(truck);
-//     }
-//     else next();
-// }
+    if (order) res.json(order);
+    else
+        next();
+}
 
-// function deleteTruckById(req: Request, res: Response, next: NextFunction) {
+function methodNotAllowed(req: Request, res: Response, next: NextFunction) {
+    next(error(405, 'Method Not Allowed'));
+}
 
-//     const truckId: number = req.query.truckId
-//         ? parseInt(req.query.truckId as string, 0)
-//         : parseInt(req.params.truckId as string, 0);
-//     console.log(`Treack id = ${truckId}`);
-
-//     const truck = trucks.find((it, i) => {
-//         if (it.id == truckId) {
-//             trucks.splice(i, 1);
-//             return true;
-//         }
-//     });
-
-//     if (truck) res.json(truck);
-//     else next();
-// }
-
-export default { getAllOrders, postNewOrder }
+export default { getAllOrders, postNewOrder, deleteAllOrders, methodNotAllowed, getOrderById, patchOrderById, deleteOrderById }

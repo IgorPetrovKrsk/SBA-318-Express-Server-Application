@@ -1,6 +1,6 @@
 export enum OrderStatus {
     Pending = 'Pending',
-    Assigned = 'Assignrd',
+    Assigned = 'Assigned',
     Delivered = 'Delivered',
     Returned = 'Returned'
 }

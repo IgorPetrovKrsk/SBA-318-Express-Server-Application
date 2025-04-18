@@ -94,4 +94,19 @@ function getOrdersLinks(){
     ];
 }
 
-export default { getRootHateoas, getApiHateoas,getTrucksLinks,getTruckByIdLinks,getOrdersLinks}
+function getOrderByIdLinks(orderId:string){
+    return [
+        {
+            href: `/${orderId}`,
+            rel: 'self',
+            type: 'PATCH',
+        },
+        {
+            href: `/${orderId}`,
+            rel: 'self',
+            type: 'DELETE',
+        },
+    ];
+}
+
+export default { getRootHateoas, getApiHateoas,getTrucksLinks,getTruckByIdLinks,getOrdersLinks,getOrderByIdLinks}

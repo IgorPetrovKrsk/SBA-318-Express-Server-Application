@@ -66,8 +66,7 @@ function deleteTruckById(req: Request, res: Response, next: NextFunction) {
     const truckId: number = req.query.truckId
         ? parseInt(req.query.truckId as string, 0)
         : parseInt(req.params.truckId as string, 0);
-    console.log(`Treack id = ${truckId}`);
-
+    
     const truck = trucks.find((it, i) => {
         if (it.id == truckId) {
             trucks.splice(i, 1);

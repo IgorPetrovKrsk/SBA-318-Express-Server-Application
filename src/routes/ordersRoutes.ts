@@ -7,12 +7,14 @@ router
     .route('/')
     .get(ordersController.getAllOrders)
     .post(ordersController.postNewOrder)
-    //.delete(trucks.deleteAllTrucks); //this is not safe
+    .delete(ordersController.deleteAllOrders)
+    .patch(ordersController.methodNotAllowed);
 
-// router
-//     .route('/:truckId') 
-//     .get(trucks.getTruckById) //getting truck by Id
-//     .put(trucks.putTruckById)
-//     .delete(trucks.deleteTruckById);
+router
+     .route('/:orderId') 
+     .get(ordersController.getOrderById) 
+     .patch(ordersController.patchOrderById)
+     .delete(ordersController.deleteOrderById)
+     .post(ordersController.methodNotAllowed);
 
 export default router;
