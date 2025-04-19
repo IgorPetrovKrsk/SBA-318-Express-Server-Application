@@ -13,7 +13,7 @@ router
 router
     .route('/:messageId')
     .get(messagesController.getMessageByTruckId) //in this case messageId is Truck Id
-    //      .patch(ordersController.patchOrderById)
+    .patch(messagesController.patchMessageById)
     .delete(messagesController.deleteMessageById)
     .post(messagesController.methodNotAllowed);
 

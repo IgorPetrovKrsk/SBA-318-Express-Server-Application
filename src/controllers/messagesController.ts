@@ -43,21 +43,23 @@ function getMessageByTruckId(req: Request, res: Response, next: NextFunction) {
         next();
 }
 
-// function patchOrderById(req: Request, res: Response, next: NextFunction) {
-//     const orderId = req.query.orderId ? req.query.orderId as string : req.params.orderId;
-//     const order = orders.find((it) => it.id === orderId);
-//     if (order && order.status !== OrderStatus.Pending) {
-//         next(error(403, 'It is forbidden to change orders that are not pending'));
-//     } else if (order) {
-//         for (const key in req.body) {
-//             //@ts-ignore                  //I don't know how to fix this TS error so just ignoring
-//             order[key] = req.body[key];
-//         }
-//         res.json({ order });
-//     }
-//     else
-//         next();
-// }
+function patchMessageById(req: Request, res: Response, next: NextFunction) {
+    const messageId: number = req.query.messageId
+        ? parseInt(req.query.messageId as string, 0)
+        : parseInt(req.params.messageId as string, 0);
+    const message = messages.find((it) => it.id === messageId);
+    if (message && message.status === MessageStatus.Read) {
+        next(error(403, 'It is forbidden to change messages that are already read. Create a new one'));
+    } else if (message) {
+        for (const key in req.body) {
+            //@ts-ignore                  //I don't know how to fix this TS error so just ignoring
+            message[key] = req.body[key];
+        }
+        res.json({ message });
+    }
+    else
+        next();
+}
 
 function deleteMessageById(req: Request, res: Response, next: NextFunction) {
     const messageId: number = req.query.messageId
@@ -80,4 +82,4 @@ function methodNotAllowed(req: Request, res: Response, next: NextFunction) {
     next(error(405, 'Method Not Allowed'));
 }
 
-export default { getAllMessages, postNewMessage, deleteAllMessages, methodNotAllowed, getMessageByTruckId, deleteMessageById }
+export default { getAllMessages, postNewMessage, deleteAllMessages, methodNotAllowed, getMessageByTruckId, deleteMessageById, patchMessageById }
