@@ -11,6 +11,7 @@ router
         Object.keys(truckTemplate).forEach(it => {
             tableHeader += `<th>${it.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase()}</th>`; //it.replace(/([a-z])([A-Z])/g, '$1 $2').toLowerCase() converts camelCase to normal string
         });
+        tableHeader += `<th></th>`;
         let tableContent = ''; //creating table of trucks
         trucks.forEach(truck => {
             tableContent += `<tr>`;

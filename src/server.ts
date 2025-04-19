@@ -16,6 +16,9 @@ const PORT = 3000;
 app.set('views', path.join(__dirname, 'views'));
 app.set("view engine", "ejs");
 
+app.use('/styles', express.static(path.join(__dirname,'./views/styles')));
+app.use('/scripts', express.static(path.join(__dirname,'./views/scripts')));
+
 const logger = winston.createLogger({
   level: 'http',
   format: winston.format.json(),
