@@ -30,16 +30,18 @@ function deleteAllMessages(req: Request, res: Response) {
 }
 
 // //functions what works with id
-// function getOrderById(req: Request, res: Response, next: NextFunction) {
-//     const orderId = req.query.orderId ? req.query.orderId as string : req.params.orderId;
-//     const orderByIdLinks = hateoas.getOrderByIdLinks(orderId);
-//     const order = orders.find((it) => it.id == orderId);
+function getMessageByTruckId(req: Request, res: Response, next: NextFunction) {
+    const truckId: number = req.query.messageId
+        ? parseInt(req.query.messageId as string, 0)
+        : parseInt(req.params.messageId as string, 0);
+    const messageByIdLinks = hateoas.getMessageByIdLinks(truckId);
+    const message = messages.filter((it) => it.truckId == truckId);
 
-//     if (order)
-//         res.json({ order, orderByIdLinks });
-//     else
-//         next();
-// }
+    if (message)
+        res.json({ message, messageByIdLinks });
+    else
+        next();
+}
 
 // function patchOrderById(req: Request, res: Response, next: NextFunction) {
 //     const orderId = req.query.orderId ? req.query.orderId as string : req.params.orderId;
@@ -57,22 +59,25 @@ function deleteAllMessages(req: Request, res: Response) {
 //         next();
 // }
 
-// function deleteOrderById(req: Request, res: Response, next: NextFunction) {
-//     const orderId = req.query.orderId ? req.query.orderId as string : req.params.orderId;
-//     const order = orders.find((it, i) => {
-//         if (it.id == orderId) {
-//             orders.splice(i, 1);
-//             return true;
-//         }
-//     });
+function deleteMessageById(req: Request, res: Response, next: NextFunction) {
+    const messageId: number = req.query.messageId
+        ? parseInt(req.query.messageId as string, 0)
+        : parseInt(req.params.messageId as string, 0);
+    const message = messages.find((it, i) => {
+        if (it.id == messageId) {
+            messages.splice(i, 1);
+            return true;
+        }
+    });
 
-//     if (order) res.json(order);
-//     else
-//         next();
-// }
+    if (message)
+        res.json(message);
+    else
+        next();
+}
 
-// function methodNotAllowed(req: Request, res: Response, next: NextFunction) {
-//     next(error(405, 'Method Not Allowed'));
-//}
+function methodNotAllowed(req: Request, res: Response, next: NextFunction) {
+    next(error(405, 'Method Not Allowed'));
+}
 
-export default { getAllMessages, postNewMessage, deleteAllMessages }
+export default { getAllMessages, postNewMessage, deleteAllMessages, methodNotAllowed, getMessageByTruckId, deleteMessageById }

@@ -8,13 +8,13 @@ router
     .get(messagesController.getAllMessages)
     .post(messagesController.postNewMessage)
     .delete(messagesController.deleteAllMessages)
-    // .patch(ordersController.methodNotAllowed);
+    .patch(messagesController.methodNotAllowed); // this is not DRY
 
-// router
-//      .route('/:orderId') 
-//      .get(ordersController.getOrderById) 
-//      .patch(ordersController.patchOrderById)
-//      .delete(ordersController.deleteOrderById)
-//      .post(ordersController.methodNotAllowed);
+router
+    .route('/:messageId')
+    .get(messagesController.getMessageByTruckId) //in this case messageId is Truck Id
+    //      .patch(ordersController.patchOrderById)
+    .delete(messagesController.deleteMessageById)
+    .post(messagesController.methodNotAllowed);
 
 export default router;
