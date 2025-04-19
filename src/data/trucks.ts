@@ -13,6 +13,17 @@ export interface Truck {
     capacity:number 
 }
 
+//object to store key because after compilation Truck interface does'n exist
+export const truckTemplate: Truck = 
+  {
+    id: -1,
+    driverName: "template",
+    licensePlate: "template",
+    status: TruckStatus.Available,
+    capacity: -1,
+  };
+
+
 //test data
 let trucks: Truck[] = [
     {
