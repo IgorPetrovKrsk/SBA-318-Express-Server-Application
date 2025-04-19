@@ -1,15 +1,20 @@
+import path from 'path';
 import express, { Request, Response, NextFunction } from 'express';
 import error from './error/error';
 import hateoas from './hateoas/hateoas';
 import truckRoutes from './routes/trucksRoutes';
 import orderRoutes from './routes/ordersRoutes';
 import messageRoutes from './routes/messageRoutes';
+import truckViewRoutes from './routes/truckViewRoutes';
 import winston from 'winston';
 
 
 //setup
 const app = express();
 const PORT = 3000;
+
+app.set('views', path.join(__dirname, 'views'));
+app.set("view engine", "ejs");
 
 const logger = winston.createLogger({
   level: 'http',
@@ -32,6 +37,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 
 //adding routes
+app.use ('/trucks',truckViewRoutes);
 app.use ('/api/trucks',truckRoutes);
 app.use ('/api/orders',orderRoutes);
 app.use ('/api/messages',messageRoutes);
