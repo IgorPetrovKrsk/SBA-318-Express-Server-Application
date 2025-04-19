@@ -6,8 +6,8 @@ const router = express.Router();
 router
     .route('/')
     .get(messagesController.getAllMessages)
-    // .post(ordersController.postNewOrder)
-    // .delete(ordersController.deleteAllOrders)
+    .post(messagesController.postNewMessage)
+    .delete(messagesController.deleteAllMessages)
     // .patch(ordersController.methodNotAllowed);
 
 // router
