@@ -9,23 +9,20 @@ function getAllMessages(req: Request, res: Response) {
     res.json({ messages, messagesLinks });
 }
 
-// function postNewOrder(req: Request, res: Response, next: NextFunction) {
-//     if (orders.find((it) => it.id == req.body.id)) { //id is already exists
-//         next(error(406, `Order with ID ${req.body.id} already exists`));
-//     } else if (req.body.id && req.body.origin && req.body.destination && req.body.weight) {
-//         const newOrder: Order = {
-//             id: req.body.id,
-//             origin: req.body.origin, //can be null
-//             destination: req.body.destination,
-//             weight: req.body.weight,
-//             status: (req.body.status) ? OrderStatus[req.body.status as keyof typeof OrderStatus] : OrderStatus.Pending, //if there is no status present then default status is Pending
-//             truckId: req.body.truckId
-//         };
-//         orders.push(newOrder);
-//         res.json(orders[orders.length - 1]);
-//     } else
-//         next(error(400, 'Insufficient Data'));
-// }
+function postNewMessage(req: Request, res: Response, next: NextFunction) {
+    if (req.body.truckId && req.body.content) {
+        const newMessage: Message = {
+            id: messages[messages.length - 1].id + 1,
+            status: MessageStatus.Pending, //Status is always pending on creation
+            truckId: req.body.truckId,
+            orderId: req.body.orderId,
+            content: req.body.content
+        };
+        messages.push(newMessage);
+        res.json(messages[messages.length - 1]);
+    } else
+        next(error(400, 'Insufficient Data'));
+}
 
 // function deleteAllOrders(req: Request, res: Response) {
 //     orders.length = 0; //clearing the array
@@ -78,4 +75,4 @@ function getAllMessages(req: Request, res: Response) {
 //     next(error(405, 'Method Not Allowed'));
 //}
 
-export default { getAllMessages }
+export default { getAllMessages, postNewMessage }
