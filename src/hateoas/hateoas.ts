@@ -54,14 +54,14 @@ function getApiHateoas(req: Request, res: Response) {
     });
 }
 
-function getTrucksLinks(){
+function getTrucksLinks() {
     return [
-         {
-             href: 'trucks/:truckId',
-             rel: ':id',
-             type: 'GET',
-         },
-         {
+        {
+            href: 'trucks/:truckId',
+            rel: ':id',
+            type: 'GET',
+        },
+        {
             href: 'trucks/?truckId={id}',
             rel: 'queryParamId',
             type: 'GET',
@@ -69,7 +69,7 @@ function getTrucksLinks(){
     ];
 }
 
-function getTruckByIdLinks(truckId:number){
+function getTruckByIdLinks(truckId: number) {
     return [
         {
             href: `/${truckId}`,
@@ -84,17 +84,17 @@ function getTruckByIdLinks(truckId:number){
     ];
 }
 
-function getOrdersLinks(){
+function getOrdersLinks() {
     return [
-         {
-             href: 'orders/:orderId',
-             rel: ':id',
-             type: 'GET',
-         }         
+        {
+            href: 'orders/:orderId',
+            rel: ':id',
+            type: 'GET',
+        }
     ];
 }
 
-function getOrderByIdLinks(orderId:string){
+function getOrderByIdLinks(orderId: string) {
     return [
         {
             href: `/${orderId}`,
@@ -109,4 +109,29 @@ function getOrderByIdLinks(orderId:string){
     ];
 }
 
-export default { getRootHateoas, getApiHateoas,getTrucksLinks,getTruckByIdLinks,getOrdersLinks,getOrderByIdLinks}
+function getMessagesLinks() {
+    return [
+        {
+            href: 'messages/:messageId',
+            rel: 'self',
+            type: 'GET',
+        }
+    ];
+}
+
+function getMessageByIdLinks(messageId: number) {
+    return [
+        {
+            href: `/${messageId}`,
+            rel: 'self',
+            type: 'PATCH',
+        },
+        {
+            href: `/${messageId}`,
+            rel: 'self',
+            type: 'DELETE',
+        },
+    ];
+}
+
+export default { getRootHateoas, getApiHateoas, getTrucksLinks, getTruckByIdLinks, getOrdersLinks, getOrderByIdLinks, getMessagesLinks, getMessageByIdLinks }

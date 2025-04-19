@@ -3,6 +3,7 @@ import error from './error/error';
 import hateoas from './hateoas/hateoas';
 import truckRoutes from './routes/trucksRoutes';
 import orderRoutes from './routes/ordersRoutes';
+import messageRoutes from './routes/messageRoutes';
 
 //setup
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 //adding routes
 app.use ('/api/trucks',truckRoutes);
 app.use ('/api/orders',orderRoutes);
+app.use ('/api/messages',messageRoutes);
 
 // Adding some HATEOAS links.
 app.get('/', hateoas.getRootHateoas);
