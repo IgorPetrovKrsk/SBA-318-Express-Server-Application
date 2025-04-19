@@ -4,11 +4,29 @@ import hateoas from './hateoas/hateoas';
 import truckRoutes from './routes/trucksRoutes';
 import orderRoutes from './routes/ordersRoutes';
 import messageRoutes from './routes/messageRoutes';
+import winston from 'winston';
+
 
 //setup
 const app = express();
 const PORT = 3000;
 
+const logger = winston.createLogger({
+  level: 'http',
+  format: winston.format.json(),
+  transports: [
+    //new winston.transports.Console(),                       //will not log to console only to file
+    new winston.transports.File({ filename: 'http.log' })
+  ]
+});
+
+logger.info('This is a test winston message');
+
+//winston to log all incoming http requests
+app.use((req, res, next) => {
+  logger.http(`Incoming request: ${req.method} ${req.url}`);
+  next();
+});
 
 //middleware
 app.use(express.json());
