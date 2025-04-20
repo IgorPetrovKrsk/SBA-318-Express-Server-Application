@@ -43,7 +43,14 @@ button {
     border: none;
     cursor: pointer;
 }
+#btn_add_truck{
+    background-color: green;
+}
 
 button:hover {
     background-color: #c82333;
+}
+
+#btn_add_truck:hover{
+    background-color: darkgreen;
 }
