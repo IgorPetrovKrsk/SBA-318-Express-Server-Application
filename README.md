@@ -67,15 +67,15 @@
   ![image](https://github.com/user-attachments/assets/fa377409-3c63-465b-9055-050fc0bea4a7)
 
 ---
-What could you have done differently during the planning stages of your project to make the execution easier?/
+What could you have done differently during the planning stages of your project to make the execution easier?<br/>
 I would select all functions that are similar for all data models and unite them in a single module (like get requests always returns array or functions to return status 405).
 
-Were there any requirements that were difficult to implement?/
+Were there any requirements that were difficult to implement?<br/>
 The template view was not so easy. Also, I could not figure out how to make a front-end typescript file (scripts/trucks) to autocompile, so I made it mjs file.
-What do you think would make them easier to implement in future projects?/
+What do you think would make them easier to implement in future projects?<br/>
 Clear separation between front-end and back-end. Or other scripts in Node.js (I've used ts-node, but there is a variant to autocompile all ts files into mjs files)
 
-What would you add to or change about your application if given more time?/
+What would you add to or change about your application if given more time?<br/>
 More data validation (like forbidding the deletion of the truck if it has orders assigned). Clearer front-end with fewer reloads from the back-end.
 
 
