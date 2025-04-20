@@ -66,3 +66,6 @@
 
   ![image](https://github.com/user-attachments/assets/fa377409-3c63-465b-9055-050fc0bea4a7)
 
+<br>
+  What could you have done differently during the planning stages of your project to make the execution easier?
+
